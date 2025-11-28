@@ -10,22 +10,22 @@ const app = express();
 // Middlewares
 app.use(cors());
 app.use(express.json());
-
-// Basic test route
-app.get("/", (req, res) => {
-  res.send("Backend is working!");
-});
-
 // Connect to MongoDB
 async function connectDB() {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect(process.env.MONGO_CONNECTION);
     console.log("MongoDB connected");
   } catch (error) {
     console.error("MongoDB Error:", error);
   }
 }
 connectDB();
+
+// Basic test route
+app.get("/", (req, res) => {
+  res.send("Backend is working!");
+});
+
 
 // IMPORTANT FOR RAILWAY
 const PORT = process.env.PORT || 3001;
